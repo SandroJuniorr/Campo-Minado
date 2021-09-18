@@ -32,12 +32,20 @@ function initializeGame(){
 
 function creatMinas (){
     //  bsuca um numero aleatori e coloca a class mina e o evento para detonar a bomba
+    let arr = []
     for(i=0; i < mina; i++){
+       
        let randomNumber = Math.round(Math.random() * zonelegth)
+       
+       if (arr.indexOf(randomNumber) === -1){
        let element = document.getElementById(randomNumber)
        element.className = "mina"
        element.addEventListener("click" , gameOver)
+    }else{
+        i--}
+       arr.push(randomNumber)
        
+    
     }
 }
 
