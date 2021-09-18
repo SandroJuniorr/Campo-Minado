@@ -1,0 +1,21 @@
+body{
+    display: grid;
+    justify-items: center;
+    
+}
+
+
+#field{
+    /* margin: auto; */
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template:  60px  60px  60px  60px 60px  60px 60px  60px / 60px  60px 60px  60px 60px  60px 60px  60px 60px  60px;
+    justify-content: center;
+    
+   
+}
+.zone{
+    border: black solid 2px;
+    background-color: rgb(25, 240, 25);
+}
