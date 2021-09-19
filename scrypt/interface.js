@@ -7,6 +7,11 @@ const field = document.getElementById("field")
 let rowLegth = 10
 let zonelegth = 80
 let mina = 10 
+let minafield = []
+let zonesRigth = []
+let zonesLefts = []
+
+
 
 initializeGame()
 
@@ -17,14 +22,16 @@ function initializeGame(){
     // criação do campo minado com as zonas(quadrados)
     for(i = 0; i < zonelegth; i++){
      let zone = document.createElement("div");
-     zone.className = "zone"
-     zone.id = i
-     field.appendChild(zone)
+     zone.className = "zone";
+     zone.id = i;
+     field.appendChild(zone);
+     minafield[i]= 0;
     
-
     }
     // adicionando as minas
-    creatMinas ()
+    creatMinas ();
+    creatarrays()
+    minasnear();
     
 
 
@@ -39,8 +46,10 @@ function creatMinas (){
        
        if (arr.indexOf(randomNumber) === -1){
        let element = document.getElementById(randomNumber)
-       element.className = "mina"
+       element.classList.add("mina")
        element.addEventListener("click" , gameOver)
+       minafield[randomNumber] = -1
+       
     }else{
         i--}
        arr.push(randomNumber)
@@ -52,10 +61,47 @@ function creatMinas (){
 function gameOver (){
     let minas = document.querySelectorAll("div.mina")
     minas.forEach(element => {
-        element.className = "detona"
+       element.className = "detona"
         
     });
 
 
 
 }
+
+function creatarrays (){
+    let lastzonerow = (rowLegth - 1);
+    let lastzone = (zonelegth - 1);
+    let lastzoneRigth = (zonelegth - rowLegth)
+    for(i = lastzonerow; i <= lastzone; (i = i + rowLegth)){
+        zonesRigth.push(i)
+        if( minafield[i] !== -1){
+            minafield[i] = "R"
+            }
+    
+    }
+    for(i = 0; i <= lastzoneRigth; (i = i + rowLegth)){
+        zonesLefts.push(i)
+        if( minafield[i] !== -1){
+        minafield[i]= "L"
+        }
+
+    }
+    
+
+    
+
+}
+function minasnear() {
+    minafield.forEach(element => {
+        if(element !== -1 && "L" && "R"){
+
+            
+
+        }
+        
+    });
+
+}
+
+
