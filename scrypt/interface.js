@@ -38,7 +38,7 @@ function initializeGame(){
 }
 
 function creatMinas (){
-    //  bsuca um numero aleatori e coloca a class mina e o evento para detonar a bomba
+    //  busca um numero aleatorio e coloca a class mina e o evento para detonar a bomba
     let arr = []
     for(i=0; i < mina; i++){
        
@@ -49,7 +49,7 @@ function creatMinas (){
        element.classList.add("mina")
        element.addEventListener("click" , gameOver)
        minafield[randomNumber] = -1
-       
+    //    console.log(minafield)
     }else{
         i--}
        arr.push(randomNumber)
@@ -68,7 +68,7 @@ function gameOver (){
 
 
 }
-
+//  cria arrays com as zonas das primeira e ultima coluna para depois poder criar metodods de contagem de minas prorprio para elas.
 function creatarrays (){
     let lastzonerow = (rowLegth - 1);
     let lastzone = (zonelegth - 1);
@@ -92,16 +92,61 @@ function creatarrays (){
     
 
 }
+// procura as minas que estão proximas
 function minasnear() {
-    minafield.forEach(element => {
-        if(element !== -1 && "L" && "R"){
-
+    for(i = 0; i < zonelegth; i++) {
+        let element = minafield[i];
+        if(element == 0 ){
             
+         let zone = document.getElementById(i) 
+         
+         zone.innerHTML = countminas(i)
+          
+        
+
 
         }
         
-    });
+    };
 
 }
+//  confere a quantidade de minas proximas
+function countminas(i){
+    
+    let Neighbor1 = (i - (rowLegth + 1))
+    let Neighbor2 = (i - (rowLegth ))
+    let Neighbor3 = (i - (rowLegth - 1))
+    let Neighbor4 = (i - 1)
+    let Neighbor5 = (i + 1)
+    let Neighbor6 = (i + (rowLegth - 1) )
+    let Neighbor7 = (i + (rowLegth ))
+    let Neighbor8 = (i + (rowLegth + 1))
+    let neighbors = [Neighbor1,Neighbor2,Neighbor3,Neighbor4,Neighbor5,Neighbor6,Neighbor7,Neighbor8]
+    let minas = []
+        for (let index = 0; index < neighbors.length; index++) {
+        let number = null
+        let neighbor = minafield[neighbors[index]];
+        console.log(neighbors[index])
+        console.log(neighbor)
+        
+        if(neighbor == -1){
+            number = neighbor 
+              
+            minas.push(number)
+             
+        }
+        
+       
+       
+    
+    }
+    return minas.length
+        
+
+        
+    };
+     
+
+
 
 
