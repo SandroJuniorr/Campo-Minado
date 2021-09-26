@@ -22,8 +22,14 @@ function initializeGame(){
     // criação do campo minado com as zonas(quadrados)
     for(i = 0; i < zonelegth; i++){
      let zone = document.createElement("div");
+     let gram = document.createElement("div");
+     let ground = document.createElement("div");
      zone.className = "zone";
-     zone.id = i;
+     gram.className = "gram-0"
+     ground.className = "ground"
+     ground.id = i;
+     zone.appendChild(ground);
+     zone.appendChild(gram);
      field.appendChild(zone);
      minafield[i]= 0;
     
@@ -46,8 +52,12 @@ function creatMinas (){
        
        if (arr.indexOf(randomNumber) === -1){
        let element = document.getElementById(randomNumber)
-       element.classList.add("mina")
-       element.addEventListener("click" , gameOver)
+       let mina = document.createElement("img")
+       let parent = element.parentElement
+       mina.src = "./assets/12158bomb_110029.png"
+       element.appendChild(mina)
+       parent.classList.add("mina")
+       parent.addEventListener("click" , gameOver)
        minafield[randomNumber] = -1
     //    console.log(minafield)
     }else{
@@ -61,6 +71,7 @@ function creatMinas (){
 function gameOver (){
     let minas = document.querySelectorAll("div.mina")
     minas.forEach(element => {
+        element.children[1].style.display = "none"
        element.className = "detona"
         
     });
@@ -105,10 +116,19 @@ function minasnear() {
         
 
 
-        }
+        }else if( element == "L"){
+            let zone = document.getElementById(i) 
+
+         zone.innerHTML = countMinasLeft(i)
+         
+        }else if( element == "R"){
+            let zone = document.getElementById(i) 
+
+         zone.innerHTML = countMinasRigth(i)
+         
         
     };
-
+    }
 }
 //  confere a quantidade de minas proximas
 function countminas(i){
@@ -126,8 +146,7 @@ function countminas(i){
         for (let index = 0; index < neighbors.length; index++) {
         let number = null
         let neighbor = minafield[neighbors[index]];
-        console.log(neighbors[index])
-        console.log(neighbor)
+        
         
         if(neighbor == -1){
             number = neighbor 
@@ -145,8 +164,59 @@ function countminas(i){
 
         
     };
+
+function countMinasLeft(i){
+    let Neighbor1 = (i - (rowLegth ))
+    let Neighbor2 = (i - (rowLegth - 1))
+    let Neighbor3 = (i + 1)
+    let Neighbor4 = (i + rowLegth )
+    let Neighbor5 = (i + (rowLegth + 1))
+    let neighbors = [Neighbor1,Neighbor2,Neighbor3,Neighbor4,Neighbor5]
+    let minas = []
+    for (let index = 0; index < neighbors.length; index++) {
+        let number = null
+        let neighbor = minafield[neighbors[index]];
+        
+        
+        if(neighbor == -1){
+            number = neighbor 
+              
+            minas.push(number)
+             
+        }
+        
+
+}
+return minas.length
      
 
+}
+function countMinasRigth(i){
+    let Neighbor1 = (i - (rowLegth + 1))
+    let Neighbor2 = (i - rowLegth)
+    let Neighbor3 = (i - 1)
+    let Neighbor4 = (i + (rowLegth - 1) )
+    let Neighbor5 = (i + rowLegth)
+    let neighbors = [Neighbor1,Neighbor2,Neighbor3,Neighbor4,Neighbor5]
+    let minas = []
+    for (let index = 0; index < neighbors.length; index++) {
+        let number = null
+        let neighbor = minafield[neighbors[index]];
+        
+        
+        if(neighbor == -1){
+            number = neighbor 
+              
+            minas.push(number)
+             
+        }
+        
+
+}
+return minas.length
+     
+
+}
 
 
 
