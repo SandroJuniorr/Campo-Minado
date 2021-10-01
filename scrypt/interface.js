@@ -25,7 +25,7 @@ function initializeGame(){
      let gram = document.createElement("div");
      let ground = document.createElement("div");
      zone.className = "zone";
-     gram.className = "gram-0"
+     gram.className = "gram"
      ground.className = "ground"
      ground.id = i;
      zone.appendChild(ground);
@@ -70,9 +70,8 @@ function creatMinas (){
 
 function gameOver (){
     let minas = document.querySelectorAll("div.mina")
-    minas.forEach(element => {
-        element.children[1].style.display = "none"
-       element.className = "detona"
+   minas.forEach(element => {
+    element.children[1].style.animation = "reveal 500ms forwards"
         
     });
 
@@ -107,24 +106,28 @@ function creatarrays (){
 function minasnear() {
     for(i = 0; i < zonelegth; i++) {
         let element = minafield[i];
+        let zone = document.getElementById(i)
+        let parent = zone.parentElement
         if(element == 0 ){
             
-         let zone = document.getElementById(i) 
+         parent.addEventListener("click" , revelzone) 
          
-         zone.innerHTML = countminas(i)
+         zone.innerHTML = ""
           
         
 
 
         }else if( element == "L"){
-            let zone = document.getElementById(i) 
+            
 
          zone.innerHTML = countMinasLeft(i)
+         parent.addEventListener("click" , revelzone) 
          
         }else if( element == "R"){
-            let zone = document.getElementById(i) 
+        
 
          zone.innerHTML = countMinasRigth(i)
+         parent.addEventListener("click" , revelzone) 
          
         
     };
@@ -216,6 +219,11 @@ function countMinasRigth(i){
 return minas.length
      
 
+}
+function revelzone() {
+
+    this.children[1].style.animation = "reveal 500ms forwards"
+    
 }
 
 
