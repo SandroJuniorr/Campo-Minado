@@ -112,22 +112,33 @@ function minasnear() {
             
          parent.addEventListener("click" , revelzone) 
          
-         zone.innerHTML = ""
+         if(countminas(i) == 0){
+            zone.innerHTML = ""
+            }else{
+                zone.innerHTML = countminas(i)
+            }
           
         
 
 
         }else if( element == "L"){
-            
-
-         zone.innerHTML = countMinasLeft(i)
-         parent.addEventListener("click" , revelzone) 
+        parent.addEventListener("click" , revelzone) 
+         if(countMinasLeft(i) == 0){
+         zone.innerHTML = ""
+         }else{
+             zone.innerHTML = countMinasLeft(i)
+         }
+          
          
         }else if( element == "R"){
-        
-
-         zone.innerHTML = countMinasRigth(i)
-         parent.addEventListener("click" , revelzone) 
+            parent.addEventListener("click" , revelzone) 
+            if(countMinasRigth(i) == 0){
+                zone.innerHTML = ""
+                }else{
+                    zone.innerHTML = countMinasRigth(i)
+                }
+                 
+         
          
         
     };
