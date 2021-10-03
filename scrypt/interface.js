@@ -110,11 +110,12 @@ function minasnear() {
         let parent = zone.parentElement
         if(element == 0 ){
             
-         parent.addEventListener("click" , revelzone) 
          
          if(countminas(i) == 0){
+            parent.addEventListener("click" , zone0)
             zone.innerHTML = ""
             }else{
+                parent.addEventListener("click" , revelzone) 
                 zone.innerHTML = countminas(i)
             }
           
@@ -236,6 +237,43 @@ function revelzone() {
     this.children[1].style.animation = "reveal 500ms forwards"
     
 }
+function zone0 (){
+    let id = this.children[0].id
+    this.children[1].style.animation = "reveal 500ms forwards"
+    revealZones0(id)
+    // console.log( revealZones0(id) )
+}
+function revealZones0(id){
+    let i = parseInt(id)
+    let Neighbor1 = (i - (rowLegth + 1))
+    let Neighbor2 = (i - (rowLegth ))
+    let Neighbor3 = (i - (rowLegth - 1))
+    let Neighbor4 = (i - 1)
+    let Neighbor5 = (i + 1)
+    let Neighbor6 = (i + (rowLegth - 1) )
+    let Neighbor7 = (i + (rowLegth ))
+    let Neighbor8 = (i + (rowLegth + 1))
+    let neighbors = [Neighbor1,Neighbor2,Neighbor3,Neighbor4,Neighbor5,Neighbor6,Neighbor7,Neighbor8]
+      
+    for (let index = 0; index < neighbors.length; index++) {
+        let neighbor =  document.getElementById(neighbors[index])
+        console.log(neighbor)
+        let innerNeighbor = neighbor.innerHTML
+        let parent = neighbor.parentElement
+        if(innerNeighbor == ""){
+            parent.children[1].style.animation = "reveal 500ms forwards"
+            // revealZones0(neighbors[index])
+            
+        }
+       
+    }
+    
+    
+   
+        
+
+        
+    };
 
 
 
